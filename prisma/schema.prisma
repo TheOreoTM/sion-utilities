@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum FeatureFlags {
+  UNDEFINED
+  DEV
+  BETA
+}
+
+model ModerationSettings {
+  guildId              String       @id @unique
+  enabled              Boolean      @default(false)
+  reportChannelId      String?
+  minAccountAgeEnabled Boolean      @default(false)
+  minAccountAgeReq     Int?
+  minAccountAgeMsg     String?
+  antiHoistEnabled     Boolean      @default(false)
+  coreSettings         CoreSettings @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+}
+
+model CoreSettings {
+  guildId            String              @id @unique
+  flags              FeatureFlags[]
+  moderationSettings ModerationSettings?
+}
+
+model IncidentMessage {
+  id         String          @unique
+  channelId  String
+  guildId    String
+  incidentId String          @unique
+  incident   DiscordIncident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+}
+
+model DiscordIncident {
+  id        String            @id @unique
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  resolved  Boolean
+  messages  IncidentMessage[]
+}

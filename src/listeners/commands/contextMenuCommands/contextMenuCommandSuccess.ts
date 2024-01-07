@@ -1,14 +1,14 @@
-import { Listener, LogLevel, type ContextMenuCommandSuccessPayload } from '@sapphire/framework';
-import type { Logger } from '@sapphire/plugin-logger';
-import { logSuccessCommand } from '../../../lib/utils';
+import { Events, Listener } from '@sapphire/framework';
+import { ApplyOptions } from '@sapphire/decorators';
+import type { ContextMenuCommandDeniedPayload, UserError } from '@sapphire/framework';
 
-export class UserListener extends Listener {
-	public override run(payload: ContextMenuCommandSuccessPayload) {
-		logSuccessCommand(payload);
-	}
-
-	public override onLoad() {
-		this.enabled = (this.container.logger as Logger).level <= LogLevel.Debug;
-		return super.onLoad();
+@ApplyOptions<Listener.Options>({
+	event: Events.ContextMenuCommandDenied
+})
+export class CommandListener extends Listener<typeof Events.ContextMenuCommandDenied> {
+	public async run({ message }: UserError, { interaction }: ContextMenuCommandDeniedPayload): Promise<void> {
+		await interaction.errorReply(message, {
+			tryEphemeral: true
+		});
 	}
 }
