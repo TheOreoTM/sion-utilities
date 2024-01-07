@@ -2,7 +2,7 @@ import { Listener } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
 import type { ChannelPermissionsPayload } from '#lib/types/Errors';
 import type { InteractionResponseUnion } from '#lib/types/Augments';
-import { SUErrors } from '#lib/types/Enums.js';
+import { SUErrors } from '#lib/types/Enums';
 
 @ApplyOptions<Listener.Options>({
 	event: SUErrors.ChannelPermissions

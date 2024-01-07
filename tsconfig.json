@@ -1,16 +1,17 @@
 {
 	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict", "@sapphire/ts-config/decorators"],
 	"compilerOptions": {
-		"baseUrl": "./src",
+		"skipLibCheck": true,
 		"rootDir": "./src",
 		"outDir": "./dist",
 		"tsBuildInfoFile": "dist/.tsbuildinfo",
-		"typeRoots": ["./src/lib/types/**/*", "../../node_modules/@types"],
+		// "typeRoots": ["./src/lib/types/**/*", "../node_modules/@types"],
 		"paths": {
-			"#config": ["config.ts"],
-			"#lib/*": ["lib/*"],
-			"#modules/*": ["modules/*"]
+			"#config": ["./src/config.ts"],
+			"#lib/*": ["./src/lib/*"],
+			"#modules/*": ["./src/modules/*"]
 		}
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"exclude": ["node_modules"]
 }

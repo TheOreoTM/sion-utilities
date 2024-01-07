@@ -2,7 +2,7 @@ import '@kbotdev/plugin-modules/register';
 import '@sapphire/plugin-scheduled-tasks/register';
 import '@sapphire/plugin-api/register';
 import { loadConfig } from '#config';
-import { SionUtilitiesClient } from '#lib/extensions/SionUtilitiesClient.js';
+import { SionUtilitiesClient } from '#lib/extensions/SionUtilitiesClient';
 import { ApplicationCommandRegistries, RegisterBehavior, container } from '@sapphire/framework';
 
 ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.BulkOverwrite);

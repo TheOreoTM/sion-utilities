@@ -1,12 +1,13 @@
 import { Validator } from '#lib/structures/Validator';
 import { WebhookErrorBuilder } from '#lib/structures/builders/WebhookErrorBuilder';
 import { ClientConfig } from '#lib/types/Config';
-import { SUErrors } from '#lib/types/Enums.js';
-import { ChannelPermissionsPayload } from '#lib/types/Errors.js';
-import { CoreModule } from '#modules/CoreModule.js';
-import { ModerationModule } from '#modules/ModerationModule.js';
+import { SUErrors } from '#lib/types/Enums';
+import { ChannelPermissionsPayload } from '#lib/types/Errors';
+import { CoreModule } from '#modules/CoreModule';
+import { ModerationModule } from '#modules/ModerationModule';
 import { RedisClient } from '@killbasa/redis-utils';
 import { PrismaClient } from '@prisma/client';
+import { ILogger } from '@sapphire/framework';
 import { APIMessage, InteractionResponse, Message } from 'discord.js';
 
 export type InteractionResponseUnion = APIMessage | InteractionResponse | Message | void;
@@ -21,6 +22,8 @@ declare module 'discord.js' {
 		 * Send formatted errors to a channel in the developer server.
 		 */
 		readonly webhook: WebhookClient | null;
+
+		logger: ILogger;
 	}
 
 	interface ClientEvents {

@@ -1,7 +1,11 @@
 import { join } from 'path';
+import { getRootData } from '@sapphire/pieces';
 
-export const rootDir = join(__dirname, '..', '..');
-export const srcDir = join(rootDir, 'src');
+export const mainFolder = getRootData().root;
+export const rootFolder = join(mainFolder, '..');
+export const assetsFolder = join(rootFolder, 'assets');
+export const imageFolder = join(assetsFolder, 'images');
+export const pluginsFolder = join(mainFolder, 'plugins');
 
 export const NodeEnvironments = {
 	Dev: 'development',

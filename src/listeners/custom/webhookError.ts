@@ -1,6 +1,6 @@
 import { Listener } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
-import { SUErrors } from '#lib/types/Enums.js';
+import { SUErrors } from '#lib/types/Enums';
 
 @ApplyOptions<Listener.Options>({
 	event: SUErrors.WebhookError
